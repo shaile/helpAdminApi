@@ -6,9 +6,15 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 const PROD_ENV = 'production';
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
+      exclude: ['/api*'],
+    }),
     ConfigModule.forRoot({
       expandVariables: true,
       isGlobal: true,
@@ -28,4 +34,3 @@ const PROD_ENV = 'production';
   providers: [AppService],
 })
 export class AppModule {}
-
