@@ -16,8 +16,8 @@ export class AuthController {
   }
 
   @Post('auth/users')
-  async create(@Body() createUsersModels: CreateUsersModel) {
-    await this.authService.create(createUsersModels);
+  async create(@Body() createUsersModels: CreateUsersModel): Promise<string> {
+   return await this.authService.create(createUsersModels);
   }
 
   @UseGuards(JwtAuthGuard)

@@ -41,6 +41,7 @@ export class AuthService {
         password: hashedPassword,
       });
       createdUser.password = undefined;
+      console.log('***********', createdUser);
       return createdUser;
     } catch (error) {
       throw new InternalServerErrorException({
