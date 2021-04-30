@@ -33,6 +33,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('/users')
   async findAll(@Query('searchText') query: string): Promise<UsersListModel[]> {
+    console.log('****************');
     return this.userService.searchUsers(query);
   }
 

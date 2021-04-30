@@ -16,7 +16,6 @@ export const UserSchema = new mongoose.Schema(
       type: Object,
       default: ''
     },
-   
     phone: String,
     createdOn: Date,
     updatedOn: Date,

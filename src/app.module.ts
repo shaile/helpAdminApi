@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { AssignmentModule } from './assignment/assignment.module';
 const PROD_ENV = 'production';
 @Module({
   imports: [
@@ -29,7 +30,8 @@ const PROD_ENV = 'production';
     }),
     AuthModule,
     UsersModule,
-    ProductModule],
+    ProductModule,
+    AssignmentModule],
   controllers: [AppController],
   providers: [AppService],
 })
