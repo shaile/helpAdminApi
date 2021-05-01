@@ -2,7 +2,7 @@ import { Body, Controller, Post, UploadedFiles, UseInterceptors } from '@nestjs/
 import { FileFieldsInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { editFileName } from 'src/common/file.validation';
-import { CreateAssignmentModel } from './assignment.model';
+import { CreateAssignmentDto, CreateAssignmentModel } from './assignment.model';
 import { AssignmentService } from './assignment.service';
 
 @Controller('api')
@@ -22,12 +22,12 @@ export class AssignmentController {
             , filename: editFileName,
           })
         }))        
-        async create( @UploadedFiles() files, @Body() createAssignmentModel: CreateAssignmentModel) { 
+        async create( @UploadedFiles() files, @Body() createAssignmentDto: CreateAssignmentDto) { 
             let newFileData = {};
-            newFileData = {...newFileData, ...files, ...createAssignmentModel};
+            newFileData = {...newFileData, ...files, ...createAssignmentDto};
             console.log('@@@@@@@@@@@@@@@@',  newFileData);
            
-          return await this.assignmentService.create({...files, ...createAssignmentModel});
+          return await this.assignmentService.create({...files, ...createAssignmentDto});
         }
 }
 

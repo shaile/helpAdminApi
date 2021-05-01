@@ -18,7 +18,7 @@ export class UserRepository {
    * @returns users 
    */
   async createUsers(createUsersModel: CreateUsersModel): Promise<any> {
-    return await this.userModel.updateOne(
+    const { email } = await this.userModel.findOneAndUpdate(
         {email: createUsersModel.email},
         { $set: {
             name: createUsersModel.name, 
@@ -26,8 +26,9 @@ export class UserRepository {
             phone: createUsersModel.phone,
             password: createUsersModel.password
         } },
-        { upsert: true }
+        { upsert: true, new: true }
     );
+    return { email };
   }
 
 

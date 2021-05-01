@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAssignmentModel } from './assignment.model';
+import { UsersService } from 'src/users/users.service';
+import { CreateAssignmentDto, CreateAssignmentModel } from './assignment.model';
 import { AssignmentRepository } from './assignment.repository';
 
 @Injectable()
 export class AssignmentService {
-    constructor(private readonly assignmentRepository: AssignmentRepository) {}
+    constructor(
+        private readonly usersService: UsersService,
+        private readonly assignmentRepository: AssignmentRepository
+        ) {}
 
 
     /**
@@ -12,7 +16,11 @@ export class AssignmentService {
      * @param createAssignmentModel 
      * @returns 
      */
-    async create(createAssignmentModel: CreateAssignmentModel) {
+    async create(createAssignmentDto: CreateAssignmentDto): Promise<any> {
+        const { _id: userId} = await this.usersService.findOne(createAssignmentDto.email);        
+        delete createAssignmentDto.email;
+        const createAssignmentModel: CreateAssignmentModel = {...createAssignmentDto, userId}
         return await this.assignmentRepository.create(createAssignmentModel);
       }
 }
+
