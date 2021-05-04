@@ -79,6 +79,18 @@ async findOne(email: string): Promise<User> {
      }
    }).exec();
  }
+
+ async findById(id: string): Promise<User> {
+  return await this.userModel.findById({_id: id}, (err: any, adventure: any) =>{
+    if(err) {
+      console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^', err);
+    }else{
+      console.log('***************sss', adventure)
+    }
+  }).exec();
+}
+
+
 /**
  * Gets current user
  * @param email 

@@ -5,7 +5,7 @@ interface IPaginator {
 }
 export interface Assignment extends Document, IPaginator {
   readonly _id: string;
-  readonly userId: string;
+  readonly userId: any;
   readonly topic: string;
   readonly documentType: string;
   readonly subject: string;

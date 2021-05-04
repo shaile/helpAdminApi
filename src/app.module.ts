@@ -24,7 +24,8 @@ const PROD_ENV = 'production';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri:'mongodb+srv://helpMyAassignment:SU6d4DB8cFDKwdRP@cluster0.yvdwk.mongodb.net/usermanegement?retryWrites=true&w=majority',
+        uri:configService
+          .get('MONGODB_URI')
       }),
       inject: [ConfigService]
     }),
