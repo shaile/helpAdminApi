@@ -26,6 +26,7 @@ export class AuthService {
       email: user._doc.email,
       sub: user._doc._id,
       name: user._doc.name,
+      role: user._doc.role
     };
     return {
       // eslint-disable-next-line @typescript-eslint/camelcase
@@ -56,6 +57,7 @@ export class AuthService {
  * @returns  
  */
 async verify(headers: any) {
+  console.log('555555555555555555', headers)
     try {
       const { authorization } = headers;
       const parts = authorization.split(' ');

@@ -24,8 +24,8 @@ export class UsersService {
    * @param searchText
    * @returns users
    */
-  async searchUsers(searchText: string): Promise<UsersListModel[]> {
-    return await this.userRepository.searchUsers(searchText);
+  async searchUsers(searchText: string, pageNo?: number, limit?: number, sortBy?: string, sortOrder?: string): Promise<UsersListModel[]> {
+    return await this.userRepository.searchUsers(searchText, pageNo, limit, sortBy, sortOrder);
   }
 
   /**

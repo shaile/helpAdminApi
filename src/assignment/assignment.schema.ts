@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import * as mongoose from 'mongoose';
 const Schema = mongoose.Schema;
-// import * as mongoosePaginate from 'mongoose-paginate-v2';
+import * as mongoosePaginate from 'mongoose-paginate-v2';
+mongoose.set('debug', true);
 
 export const AssignmentSchema = new mongoose.Schema(
   {
     userId:{
       type: Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'Users'
     },
     topic: String,
     documentType: String,   
@@ -46,4 +48,4 @@ export const AssignmentSchema = new mongoose.Schema(
   }
 );
 
-// UserSchema.plugin(mongoosePaginate);
+AssignmentSchema.plugin(mongoosePaginate);

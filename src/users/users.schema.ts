@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-// import * as mongoosePaginate from 'mongoose-paginate-v2';
+import * as mongoosePaginate from 'mongoose-paginate-v2';
 
 export const UserSchema = new mongoose.Schema(
   {
@@ -29,4 +29,4 @@ export const UserSchema = new mongoose.Schema(
   }
 );
 
-// UserSchema.plugin(mongoosePaginate);
+UserSchema.plugin(mongoosePaginate);

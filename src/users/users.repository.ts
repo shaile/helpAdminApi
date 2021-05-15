@@ -1,15 +1,17 @@
 import { Injectable, Logger, Inject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { PaginateModel } from 'mongoose';
 import { User } from './user.interface';
 import { CreateUsersModel, UpdateUsersModels, UploadPhoto } from './user.model';
 
 @Injectable()
 export class UserRepository { 
-
+  defaultLimit = 5;
+  defaultPageNo = 1;
+  defaultOffset = 0;
   constructor(
     @InjectModel('User')
-    private userModel: Model<User>,
+    private userModel: PaginateModel<User>,
   ) {}
 
   /**
@@ -54,16 +56,28 @@ async update(update: UpdateUsersModels, email: string): Promise<any> {
    * @param searchText 
    * @returns users 
    */
-  async searchUsers(searchText: string): Promise<User[]> {   
+  async searchUsers(searchText: string, pageNo?: number, limit?: number, sortBy?: string, sortOrder?: any): Promise<any> {   
     const queryObj = {};
-    const options = { password: 0}
+    let sort = {};
+    sortOrder = sortOrder === 'ASC' ? 1 : -1;
+    if (sortBy && sortOrder) {
+      sort[sortBy] = sortOrder;
+    } else {
+      sort = {createdOn: -1,  name: -1,  };
+    }
+   
+    const options = {
+      page: pageNo ? pageNo : this.defaultPageNo,
+      limit: limit ? limit : this.defaultLimit,
+      sort
+    };
     if (searchText) {
         queryObj[`$or`] = [
           { name: { $regex: '.*' + searchText + '.*', $options: 'i' } },
           { email: { $regex: '.*' + searchText + '.*', $options: 'i' } }
         ];
       }
-    return await this.userModel.find(queryObj, options);
+    return await this.userModel.paginate(queryObj, options);
  }
 /**
  * Finds one

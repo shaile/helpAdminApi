@@ -11,11 +11,11 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import * as fs from 'fs';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/role/roles.guard';
 import { UpdateUsersModels, UsersListModel } from './user.model';
 import { UsersService } from './users.service';
 
@@ -31,12 +31,19 @@ export class UsersController {
    * @param query
    * @returns all
    */
+  @UseGuards(RolesGuard)
   @UseGuards(JwtAuthGuard)
   @Get('/users')
-  async findAll(@Query('searchText') query: string): Promise<UsersListModel[]> {
-    return this.userService.searchUsers(query);
+  async findAll(
+    @Query('searchText') searchText: string,
+    @Query('page') pageNo: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy: string,
+    @Query('sortOrder') sortOrder: string): Promise<UsersListModel[]> {
+    return this.userService.searchUsers(searchText, pageNo, limit, sortBy, sortOrder);
   }
 
+  @UseGuards(RolesGuard)
   @UseGuards(JwtAuthGuard)
   @Get('/users/:userId')
   async findById(@Param() params): Promise<any> {
