@@ -12,10 +12,10 @@ jobs:
    runs-on: ubuntu-latest
    steps: 
     - uses: actions@v1
-    - name: Use Nodejs ${{ matrix.node-version }}
+    - name: Use Nodejs 14
       uses: actions@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 14
     - name: npm install, build
       run: |
         npm run build --if--present
