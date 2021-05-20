@@ -16,7 +16,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14
-    - name: npm install, build
+    - name: Install Dependencies
+      run: npm install
+    - name: Check Quality
+      run: npm run test
       run: |
         npm install
         npm run build --if--present
