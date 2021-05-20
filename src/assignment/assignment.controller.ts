@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Headers, Param, Post, Query, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RolesGuard } from 'src/auth/role/roles.guard';
-import { editFileName } from 'src/common/file.validation';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/role/roles.guard';
+import { editFileName } from '../common/file.validation';
 import { CreateAssignmentDto } from './assignment.model';
 import { AssignmentService } from './assignment.service';
 
