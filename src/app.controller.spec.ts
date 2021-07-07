@@ -16,7 +16,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Welome to the Az App !');
+      expect(appController.getHello()).toBe('Welome to the Azure App !');
     });
   });
 });
