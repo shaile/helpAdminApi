@@ -35,5 +35,5 @@ jobs:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         slot-name: Production
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_28122C2C83C44AA0BC10F65C7A4B8AB2 }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        package: .
 
