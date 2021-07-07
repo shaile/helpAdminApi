@@ -3,6 +3,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Welome to the Az App !';
+    return 'Welome to the Azure App !';
   }
 }
